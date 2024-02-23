@@ -33,11 +33,12 @@ char *token_terminator(char *token);
 
 /* Counts the number of tokens in the string argument. */
 int count_tokens(char *str){
+  int count  = 0;
   while(*str) {
-    if(space_char(*str)){
-      return str;
+    if(non_space_char(*str)){
+      count ++;
     }
-    str ++;
+    return count;
   }
   return 0;
 }
