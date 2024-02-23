@@ -32,7 +32,15 @@ char *token_start(char *str){
 char *token_terminator(char *token);
 
 /* Counts the number of tokens in the string argument. */
-int count_tokens(char *str);
+int count_tokens(char *str){
+  while(*str) {
+    if(space_char(*str)){
+      return str;
+    }
+    str ++;
+  }
+  return 0;
+}
 
 /* Returns a fresly allocated new zero-terminated string 
    containing <len> chars from <inStr> */
