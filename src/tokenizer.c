@@ -1,5 +1,6 @@
 #include "stdlib.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 
 /* Return true (non-zero) if c is a whitespace characer
 
@@ -21,6 +22,7 @@ int space_char(char c){
 
 int non_space_char(char c){
 
+  if(c == '\0') return 0;
   return !space_char(c);
 
 }
@@ -36,12 +38,12 @@ int non_space_char(char c){
 char *token_start(char *str){
 
   while (*str) {
-    if (non_space_char(*str)){ //*str is the value, while str is the pointer
-      return str;
+    if (non_space_char(*str)){ //*str is the value, while str is the pointer. If it encounters a space then retturn the next character after the space
+      return str++;
     }
     str ++;
   }
-  return 0;
+  return NULL;
 }
 
 
@@ -49,13 +51,13 @@ char *token_start(char *str){
 
 char *token_terminator(char *token){
 
-  while(*str){
-    if(space_char(*str)){
-      return str--;
+  while(*token){
+    if(space_char(*token)){ //if it encounters a space it returns the character before the space which should be the last char of the token
+      return *token--;
     }
-    str++;
+    token++;
   }
-  return 0;
+  return NULL;
 
 }
 
