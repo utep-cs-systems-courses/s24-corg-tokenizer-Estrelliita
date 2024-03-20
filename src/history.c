@@ -22,23 +22,25 @@ List* init_history(){
 */
 
 void add_history(List *list, char *str){
-  Item *item = malloc(sizeof(Item));
-  item->id = item->count++;// Create a new item and set the id field to the next available id.
-  item->str = strdup(str);// Set the str field to the string passed in.
+  Item *item = malloc(sizeof(Item)); //allocates memory for a new Item structure and assigns its address to the item pointer.
+  char * start = token_start(str);
+  item->str = copy_str(start, token_terminator(str)-start);// Set the str field to the string passed in.
   item->next = NULL;// Set the next field to NULL.
 
   // Add the new item to the end of the list.
   if(list->root == NULL){
-    list->root - item;
+    item->id = 0;
+    list->root = item;
   }
   else{
     // Search through the list for the last node
-    Item *ptr = list->root:
-    while(ptr->next != NULL){
-      ptr = ptr->next;
+    Item *temp = list->root;
+    while(temp->next != NULL){
+      temp = temp->next;
     }
-    //Add Item after ptr
-    ptr->next = item;
+    //Add Item after temp
+    item->id = temp->id + 1;
+    temp->next = item;
   }
 }
 
@@ -50,7 +52,16 @@ void add_history(List *list, char *str){
 
    int id - the id of the Item to find */
 
-char *get_history(List *list, int id){}
+char *get_history(List *list, int id){
+  Item *temp = list-> root;
+  while(temp->next != NULL){
+    if(temp->id == id){
+      return temp->str;
+    }
+    temp = temp->next
+  }
+  
+}
 
 
 
