@@ -87,6 +87,14 @@ void print_history(List *list){
 /*Free the history list and the strings it references. */
 
 void free_history(List *list){
+  Item *temp = list->root;
+  while(temp != NULL){
+    Item *next = temp->next;
+    free(temp);
+    temp = next;
+  }
+  list->root = NULL;
 
+  //or just do list-> root = NULL; but it would not free space?
 
 }
