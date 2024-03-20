@@ -24,6 +24,9 @@ List* init_history(){
 void add_history(List *list, char *str){
   Item *item = malloc(sizeof(Item)); //allocates memory for a new Item structure and assigns its address to the item pointer.
   char * start = token_start(str);
+
+  //item->str = strdup(str);// Set the str field to the string passed in. Do I really need copy_str?
+  
   item->str = copy_str(start, token_terminator(str)-start);// Set the str field to the string passed in.
   item->next = NULL;// Set the next field to NULL.
 
@@ -54,12 +57,14 @@ void add_history(List *list, char *str){
 
 char *get_history(List *list, int id){
   Item *temp = list-> root;
+  if(id == 0){return temp->str;}
   while(temp->next != NULL){
     if(temp->id == id){
       return temp->str;
     }
-    temp = temp->next
+    temp = temp->next;
   }
+  return NULL; //Return null of id not found
   
 }
 
@@ -67,10 +72,21 @@ char *get_history(List *list, int id){
 
 /*Print the entire contents of the list. */
 
-void print_history(List *list){}
+void print_history(List *list){
+
+  Item *temp = list->root;
+  while(temp != NULL){
+    printf("%d. %s\n",tmp->id,tmp->str); //prints the history item with ID tmp->id and string tmp->str in the format "ID. string"
+    temp = temp->next;
+  }
+  
+}
 
 
 
 /*Free the history list and the strings it references. */
 
-void free_history(List *list){}
+void free_history(List *list){
+
+
+}

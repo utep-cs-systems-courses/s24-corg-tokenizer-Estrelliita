@@ -37,11 +37,15 @@ int non_space_char(char c){
 
 char *token_start(char *str){
 
-  while (*str) {
-    if (non_space_char(*str)){ //*str is the value, while str is the pointer. If it encounters a space then retturn the next character after the space
-      return str++;
+  while (*str) { //*str is the value, while str is the pointer. If it encounters a space then retturn the next character after the space
+    if (space_char(*str) || *str == '\0'){ //If space or end of string is reached, increment and check for null again
+      str++;
+      if(*str == '\0'){// String consists only of spaces or is empty
+	return NULL;
+      }
+    } else{// Found a non-space character, return the pointer
+      return str;
     }
-    str ++;
   }
   return NULL;
 }
@@ -69,4 +73,25 @@ int count_tokens(char *str){
   int count  = 0;
   while(*str) {
     str = *token_terminator() 
+  }
+}
+ 
+char *copy_str(char *inStr, short len){
+
+  char *str = (char*)malloc(sizeof(char) * len);
+
+  char *tmp = str;
+
+  while((--len) >= 0){
+
+    *tmp = *inStr;
+
+    tmp++;
+
+    inStr++;
+
+  }
+
+  return str;
+
   }
