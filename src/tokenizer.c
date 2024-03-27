@@ -72,7 +72,7 @@ int count_tokens(char *str){
 
   int count  = 0;
   while(*str) {
-    str = *token_terminator() 
+    str = *token_terminator(str); 
   }
 }
  

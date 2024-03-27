@@ -76,7 +76,7 @@ void print_history(List *list){
 
   Item *temp = list->root;
   while(temp != NULL){
-    printf("%d. %s\n",tmp->id,tmp->str); //prints the history item with ID tmp->id and string tmp->str in the format "ID. string"
+    printf("%d. %s\n",temp->id,temp->str); //prints the history item with ID tmp->id and string tmp->str in the format "ID. string"
     temp = temp->next;
   }
   
