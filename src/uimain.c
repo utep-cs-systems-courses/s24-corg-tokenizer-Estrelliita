@@ -7,40 +7,48 @@ int main(int argc, char* argv[]){
   List * history = init_history();
   while(1){
     //fputs("Write 's' to input a sentence, 'h' to view history, or 'q' to exit\n>", stdout);
-    //int input = getchar();
     char str[25];
 
+    printf("Write 's' to input a sentence, 'h' to view history, or 'q' to exit\n>");
+    
     printf("$");
 
     fgets(str,25,stdin);
 
-    if(*str == '!') {
+    if(*str == 'q') {
 
-      if(*(str+1) == 'q') {
-
-	free_history(history);
+      free_history(history);
 	
-	return 0;
+      return 0;
+    }
+
+    else if (*str == 's'){ //if user enters a string
+	
+      while(*str && (*str != 's') && (space_char(*str) || *str == '\n')){
+	str++;
       }
-
-      else if (*str == 's'){ //if user enters a string
-	
-	char *text = str + 2;
-	
-	add_history(history, text);
-
-	print_history(history);
+      if (*str == '\0'){
+	printf("No text entered \n");
       }
+      else{
+	add_history(history, str);
+	char *text = str;
+	char *token = token_start(text);
+	while (token){
+	  char *end = token_terminator(token);
+	  printf("%s\n", token);
+	  token = token_start(end + 1);
+	}
+      }   
+    }
 
-      else { //default
-	add_history(history,str);
+    else if(*str == 'h') { //if user wants to look at history
 
 	print_history(history);
 
       }
     }
 
-    else add_history(history,str);
   }
 
 }
