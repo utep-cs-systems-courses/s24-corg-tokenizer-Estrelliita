@@ -1,7 +1,7 @@
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "history.h"
 #include "tokenizer.h"
-#include "tokenizer.c"
 
 /* Initialize the linked list to keep the history. */
 

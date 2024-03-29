@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#inlcude "history.h"
-#include "history.c"
+#include "history.h"
+#include "tokenizer.h"
 
 int main(int argc, char* argv[]){
   List * history = init_history();
@@ -16,15 +16,31 @@ int main(int argc, char* argv[]){
 
     if(*str == '!') {
 
-      if(*(str+1) == 'q') return 0;
+      if(*(str+1) == 'q') {
 
-      add_history(history,str);
+	free_history(history);
+	
+	return 0;
+      }
 
-      printf("%s",get_history(history,atoi(str+1)));
+      else if (*str == 's'){ //if user enters a string
+	
+	char *text = str + 2;
+	
+	add_history(history, text);
 
+	print_history(history);
+      }
+
+      else { //default
+	add_history(history,str);
+
+	print_history(history);
+
+      }
     }
 
-    else add_history(hist,str);
+    else add_history(history,str);
   }
 
 }

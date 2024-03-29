@@ -1,6 +1,6 @@
-#include "stdlib.h"
 #include <stdlib.h>
 #include <stdio.h>
+#define _TOKENIZER_
 
 /* Return true (non-zero) if c is a whitespace characer
 
@@ -57,7 +57,7 @@ char *token_terminator(char *token){
 
   while(*token){
     if(space_char(*token)){ //if it encounters a space it returns the character before the space which should be the last char of the token
-      return *token--;
+      return token;
     }
     token++;
   }
@@ -72,8 +72,13 @@ int count_tokens(char *str){
 
   int count  = 0;
   while(*str) {
-    str = *token_terminator(str); 
+    str = token_terminator(str);
+    if(str){
+      count++;
+      str++;
+    }
   }
+  return count;
 }
  
 char *copy_str(char *inStr, short len){
@@ -95,3 +100,4 @@ char *copy_str(char *inStr, short len){
   return str;
 
   }
+
