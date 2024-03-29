@@ -32,13 +32,14 @@ int main(int argc, char* argv[]){
       
       else{
 	add_history(history, str);
+	print_history(history);
 	char *token = token_start(str);
 	while (token){
 	  char *end = token_terminator(token);
 	  printf("%s\n", token);
 	  token = token_start(end + 1);
 	}
-	return 0;
+	return 1;
       }   
     }
 
